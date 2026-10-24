@@ -1,6 +1,6 @@
 # Edge AI Lab 1: CUDA SGEMM Optimization
 
-FP32 SGEMM (C = alpha*A@B + beta*C) implemented step by step in CUDA:
+FP32 SGEMM (`C = alpha * A @ B + beta * C`) implemented step by step in CUDA:
 naive -> coalesced -> shared memory -> 2D register tiling -> custom optimizations.
 
 ## Results (M=N=K=4096)
