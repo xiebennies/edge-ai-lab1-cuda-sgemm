@@ -1,0 +1,8 @@
+reports/
+*.bak
+sgemm
+sgemm_solution
+ptxas_info.txt
+*.ncu-rep
+*.nsys-rep
+*.sqlite

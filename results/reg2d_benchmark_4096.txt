@@ -1,0 +1,42 @@
+===== reg2d_128x128x8_8x8 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+5   reg2d_128x128x8_8x8         28.8451     4764.7       7.0    69.5%    44.3%     2.4%  PASS (err 1.3e-04)
+===== reg2d_64x64x8_4x4 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+6   reg2d_64x64x8_4x4           39.9411     3441.0       5.0    53.6%    32.0%     1.7%  PASS (err 1.3e-04)
+===== reg2d_128x64x8_8x4 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+7   reg2d_128x64x8_8x4          33.1786     4142.4       6.1    65.4%    38.5%     2.1%  PASS (err 1.3e-04)
+===== reg2d_64x64x16_4x4 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+8   reg2d_64x64x16_4x4          39.4691     3482.2       5.1    55.2%    32.3%     1.8%  PASS (err 1.3e-04)
+===== reg2d_128x128x16_8x8 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+9   reg2d_128x128x16_8x8        30.4415     4514.9       6.6    72.8%    41.9%     2.3%  PASS (err 1.3e-04)
+===== reg2d_64x128x32_4x8 =====
+GPU: NVIDIA GeForce RTX 3060 Laptop GPU  (sm_86, 30 SMs, L2 3.0 MB)
+Approx. peaks: FP32 10767 GFLOP/s, DRAM 288 GB/s  (verify against your spec sheet!)
+Problem: M=4096 N=4096 K=4096 alpha=1 beta=0
+
+id  kernel                           ms    GFLOP/s      GB/s  %cuBLAS   %peakF  %peakBW  check
+10  reg2d_64x128x32_4x8         42.1192     3263.1       4.8    51.7%    30.3%     1.7%  PASS (err 1.3e-04)
