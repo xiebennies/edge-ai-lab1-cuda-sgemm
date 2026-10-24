@@ -1,0 +1,206 @@
+===== naive_2048_2048_2048 =====
+[3219] sgemm@127.0.0.1
+  sgemm_naive(int, int, int, float, const float *, const float *, float, float *) (64, 64, 1)x(32, 32, 1), Context 1, Stream 13, Device 0, CC 8.6
+    Warning: Data collection happened without fixed GPU frequencies. Profiling results may be inconsistent.
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- --------------
+    Metric Name             Metric Unit   Metric Value
+    ----------------------- ----------- --------------
+    DRAM Frequency                  Ghz           6.00
+    SM Frequency                    Ghz           1.79
+    Elapsed Cycles                cycle    299,721,222
+    Memory Throughput                 %          98.65
+    DRAM Throughput                   %           2.42
+    Duration                         ms         167.03
+    L1/TEX Cache Throughput           %          99.01
+    L2 Cache Throughput               %           1.17
+    SM Active Cycles              cycle 298,534,562.83
+    Compute (SM) Throughput           %          11.96
+    ----------------------- ----------- --------------
+
+    INF   The kernel is utilizing greater than 80.0% of the available compute or memory performance of the device. To   
+          further improve performance, work will likely need to be shifted from the most utilized to another unit.      
+          Start by analyzing L1 in the Memory Workload Analysis section.                                                
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           16
+    Block Limit Registers                 block            1
+    Block Limit Shared Mem                block            8
+    Block Limit Warps                     block            1
+    Theoretical Active Warps per SM        warp           32
+    Theoretical Occupancy                     %        66.67
+    Achieved Occupancy                        %        65.61
+    Achieved Active Warps Per SM           warp        31.49
+    ------------------------------- ----------- ------------
+
+    OPT   Est. Speedup: 1.355%                                                                                          
+          The 8.00 theoretical warps per scheduler this kernel can issue according to its occupancy are below the       
+          hardware maximum of 12. This kernel's theoretical occupancy (66.7%) is limited by the number of required      
+          registers. This kernel's theoretical occupancy (66.7%) is limited by the number of warps within each block.   
+
+===== coalesced_2048_2048_2048 =====
+[3546] sgemm@127.0.0.1
+  sgemm_coalesced(int, int, int, float, const float *, const float *, float, float *) (64, 256, 1)x(32, 8, 1), Context 1, Stream 13, Device 0, CC 8.6
+    Warning: Data collection happened without fixed GPU frequencies. Profiling results may be inconsistent.
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.99
+    SM Frequency                    Ghz         1.76
+    Elapsed Cycles                cycle   35,982,514
+    Memory Throughput                 %        99.64
+    DRAM Throughput                   %        73.85
+    Duration                         ms        20.48
+    L1/TEX Cache Throughput           %        99.78
+    L2 Cache Throughput               %        20.55
+    SM Active Cycles              cycle   35,897,732
+    Compute (SM) Throughput           %        99.64
+    ----------------------- ----------- ------------
+
+    INF   The kernel is utilizing greater than 80.0% of the available compute or memory performance of the device. To   
+          further improve performance, work will likely need to be shifted from the most utilized to another unit.      
+          Start by analyzing workloads in the Compute Workload Analysis section.                                        
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           16
+    Block Limit Registers                 block            6
+    Block Limit Shared Mem                block            8
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           48
+    Theoretical Occupancy                     %          100
+    Achieved Occupancy                        %        99.52
+    Achieved Active Warps Per SM           warp        47.77
+    ------------------------------- ----------- ------------
+
+===== reg2d_64x64x8_4x4_2048 =====
+[4459] sgemm@127.0.0.1
+  void sgemm_reg2d<64, 64, 8, 4, 4>(int, int, int, float, const float *, const float *, float, float *) (32, 32, 1)x(256, 1, 1), Context 1, Stream 13, Device 0, CC 8.6
+    Warning: Data collection happened without fixed GPU frequencies. Profiling results may be inconsistent.
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         6.00
+    SM Frequency                    Ghz         1.78
+    Elapsed Cycles                cycle    7,911,503
+    Memory Throughput                 %        74.12
+    DRAM Throughput                   %        12.10
+    Duration                         ms         4.46
+    L1/TEX Cache Throughput           %        74.31
+    L2 Cache Throughput               %        17.37
+    SM Active Cycles              cycle 7,891,317.90
+    Compute (SM) Throughput           %        59.07
+    ----------------------- ----------- ------------
+
+    OPT   Memory is more heavily utilized than Compute: Look at the Memory Workload Analysis section to identify the L1 
+          bottleneck. Check memory replay (coalescing) metrics to make sure you're efficiently utilizing the bytes      
+          transferred. Also consider whether it is possible to do more work per memory access (kernel fusion) or        
+          whether there are values you can (re)compute.                                                                 
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           16
+    Block Limit Registers                 block            5
+    Block Limit Shared Mem                block           12
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           40
+    Theoretical Occupancy                     %        83.33
+    Achieved Occupancy                        %        81.25
+    Achieved Active Warps Per SM           warp        39.00
+    ------------------------------- ----------- ------------
+
+===== reg2d_best_2048 =====
+[4082] sgemm@127.0.0.1
+  void sgemm_reg2d<128, 128, 8, 8, 8>(int, int, int, float, const float *, const float *, float, float *) (16, 16, 1)x(256, 1, 1), Context 1, Stream 13, Device 0, CC 8.6
+    Warning: Data collection happened without fixed GPU frequencies. Profiling results may be inconsistent.
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.99
+    SM Frequency                    Ghz         1.40
+    Elapsed Cycles                cycle    6,332,794
+    Memory Throughput                 %        59.35
+    DRAM Throughput                   %        12.57
+    Duration                         ms         4.52
+    L1/TEX Cache Throughput           %        63.62
+    L2 Cache Throughput               %        13.61
+    SM Active Cycles              cycle 6,050,045.27
+    Compute (SM) Throughput           %        51.33
+    ----------------------- ----------- ------------
+
+    OPT   This kernel exhibits low compute throughput and memory bandwidth utilization relative to the peak performance 
+          of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak typically indicate    
+          latency issues. Look at Scheduler Statistics and Warp State Statistics for potential reasons.                 
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           16
+    Block Limit Registers                 block            2
+    Block Limit Shared Mem                block            7
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           16
+    Theoretical Occupancy                     %        33.33
+    Achieved Occupancy                        %        31.61
+    Achieved Active Warps Per SM           warp        15.17
+    ------------------------------- ----------- ------------
+
+    OPT   Est. Speedup: 40.65%                                                                                          
+          The 4.00 theoretical warps per scheduler this kernel can issue according to its occupancy are below the       
+          hardware maximum of 12. This kernel's theoretical occupancy (33.3%) is limited by the number of required      
+          registers.                                                                                                    
+
+===== custom_v2_2048 =====
+[7213] sgemm@127.0.0.1
+  sgemm_custom_v2(int, int, int, float, const float *, const float *, float, float *) (16, 16, 1)x(256, 1, 1), Context 1, Stream 13, Device 0, CC 8.6
+    Warning: Data collection happened without fixed GPU frequencies. Profiling results may be inconsistent.
+    Section: GPU Speed Of Light Throughput
+    ----------------------- ----------- ------------
+    Metric Name             Metric Unit Metric Value
+    ----------------------- ----------- ------------
+    DRAM Frequency                  Ghz         5.99
+    SM Frequency                    Ghz         1.79
+    Elapsed Cycles                cycle    6,061,057
+    Memory Throughput                 %        57.45
+    DRAM Throughput                   %        12.41
+    Duration                         ms         3.38
+    L1/TEX Cache Throughput           %        62.76
+    L2 Cache Throughput               %        14.05
+    SM Active Cycles              cycle 5,500,495.23
+    Compute (SM) Throughput           %        47.84
+    ----------------------- ----------- ------------
+
+    OPT   This kernel exhibits low compute throughput and memory bandwidth utilization relative to the peak performance 
+          of this device. Achieved compute throughput and/or memory bandwidth below 60.0% of peak typically indicate    
+          latency issues. Look at Scheduler Statistics and Warp State Statistics for potential reasons.                 
+
+    Section: Occupancy
+    ------------------------------- ----------- ------------
+    Metric Name                     Metric Unit Metric Value
+    ------------------------------- ----------- ------------
+    Block Limit SM                        block           16
+    Block Limit Registers                 block            2
+    Block Limit Shared Mem                block            7
+    Block Limit Warps                     block            6
+    Theoretical Active Warps per SM        warp           16
+    Theoretical Occupancy                     %        33.33
+    Achieved Occupancy                        %        31.68
+    Achieved Active Warps Per SM           warp        15.21
+    ------------------------------- ----------- ------------
+
+    OPT   Est. Speedup: 42.55%                                                                                          
+          The 4.00 theoretical warps per scheduler this kernel can issue according to its occupancy are below the       
+          hardware maximum of 12. This kernel's theoretical occupancy (33.3%) is limited by the number of required      
+          registers.                                                                                                    
+
